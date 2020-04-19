@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ApplicationUser} from './model/applicationUser';
+import {Router} from '@angular/router';
+import {AuthenticationService} from './services/authentication/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,58 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'servicii-sociale-ui';
+
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(x => {
+      this.currentUser = x;
+      if (this.currentUser) {
+        this.name = this.currentUser.username;
+      } else {
+        this.name = '';
+      }
+    });
+  }
+
+  get isAuthenticated() {
+    return this.currentUser;
+  }
+
+  get isAdmin() {
+    return this.getRole('ROLE_ADMIN');
+  }
+
+  get isWrite() {
+    return this.getRole('ROLE_WRITE');
+  }
+
+  get isUser() {
+    return this.getRole('ROLE_USER');
+  }
+
+  title = 'volunteers-ui';
+  currentUser: ApplicationUser;
+  name: string;
+
+  getRole(role: string) {
+    if (!this.currentUser) {
+      return false;
+    }
+
+    for (const userRole of this.currentUser.roles) {
+      if (role !== userRole.name) {
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.name = '';
+    this.router.navigate(['/login']);
+  }
 }

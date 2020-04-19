@@ -1,0 +1,80 @@
+
+<!--<div class="col-md-6 offset-md-3 mt-5">-->
+<!--  <div class="card">-->
+<!--    <h4 class="card-header">Sign-up user</h4>-->
+<!--    <div class="card-body">-->
+<!--      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">-->
+<!--        <div class="form-group">-->
+<!--          <label for="username">Username</label>-->
+<!--          <input type="text" id="username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />-->
+<!--          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">-->
+<!--            <div *ngIf="f.username.errors.required">Username is required</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="confirmPassword">Confirm password</label>-->
+<!--          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />-->
+<!--          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">-->
+<!--            <div *ngIf="f.confirmPassword.errors.required">Confirmation of password is required</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--          <ng-multiselect-dropdown formControlName="roles" [placeholder]="'Select user role'" [data]="dropdownList"-->
+<!--                                [settings]="dropdownSettings"></ng-multiselect-dropdown>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <select multiple formControlName="roles">&ndash;&gt;-->
+<!--&lt;!&ndash;          <option value="">Choose your city</option>&ndash;&gt;-->
+<!--&lt;!&ndash;          <option *ngFor="let role of myOptions" [ngValue]="role">{{role.name}}&ndash;&gt;-->
+<!--&lt;!&ndash;          </option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group0">&ndash;&gt;-->
+<!--&lt;!&ndash;          <label class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="checkbox" (change)="onCheckboxChange($event)" name="Admin" [value]="admin">Admin<br>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="checkbox" (change)="onCheckboxChange($event)" name="User" [value]="user">User<br>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="checkbox" (change)="onCheckboxChange($event)" name="Write" [value]="write">Writer<br>&ndash;&gt;-->
+<!--&lt;!&ndash;          </label>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--          <label for="password">Password</label>-->
+<!--          <input type="password" id="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />-->
+<!--          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">-->
+<!--            <div *ngIf="f.password.errors.required">Password is required</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <button class="btn btn-primary">-->
+<!--          Sign-up-->
+<!--        </button>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<div class="container">
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Username: </label>
+      <input type="text" class="form-control" formControlName="username" required autofocus />
+    </div>
+    <div class="form-group">
+      <label>Password: </label>
+      <input type="password" class="form-control" formControlName="password" required autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Password: </label>
+      <input type="password" class="form-control" formControlName="confirmPassword" required autofocus/>
+    </div>
+    <div>
+      <ng-multiselect-dropdown formControlName="roles" [placeholder]="'Select user role'" [data]="dropdownList"
+                               [settings]="dropdownSettings"></ng-multiselect-dropdown>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Sign-up</button>
+    </div>
+  </form>
+
+  <br> Dirty: {{signUpForm.dirty}}
+  <br> Touched: {{signUpForm.touched}}
+  <br> Valid: {{signUpForm.valid}}
+  <br> Value: {{signUpForm.value | json}}
+
+</div>

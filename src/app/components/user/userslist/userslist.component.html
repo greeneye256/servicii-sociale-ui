@@ -1,0 +1,24 @@
+
+<div class='card' style="width: 70%; margin: auto">
+  <div class="card-header">
+    Lista useri
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <th>Id</th>
+      <th>Nume</th>
+      <th>Roles</th>
+      <th></th>
+      <th></th>
+      </thead>
+      <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td><span *ngFor="let role of user.roles">{{role.name}}&nbsp;&nbsp;</span></td>
+        <td><a type="button" routerLink="/edit/user/{{user.id}}">Edit</a></td>
+        <td><button (click)="deleteUser(user.id)">Delete</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
