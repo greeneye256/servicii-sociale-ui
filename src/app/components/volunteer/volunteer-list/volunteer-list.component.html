@@ -1,0 +1,24 @@
+<div class='card' style="width: 70%; margin: auto">
+  <div class="card-header">
+    Lista voluntari
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <th>Nume</th>
+      <th>Prenume</th>
+      <th>Numar de telefon</th>
+      <th>Email</th>
+      <th></th>
+      </thead>
+      <tr *ngFor="let volunteer of volunteers">
+        <td>{{volunteer.firstName}}</td>
+        <td>{{volunteer.lastName}}</td>
+        <td>{{volunteer.phoneNumber}}</td>
+        <td>{{volunteer.email}}</td>
+        <td><a type="button" routerLink="/volunteer-edit/{{volunteer.id}}">Edit</a></td>
+        <td><button (click)="deleteVolunteer(volunteer.id)">Delete</button></td>
+      </tr>
+    </table>
+  </div>
+</div>

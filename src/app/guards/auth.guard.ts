@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {ApplicationUser} from '../model/applicationUser';
 import {AuthenticationService} from '../services/authentication/authentication.service';
 
@@ -11,12 +11,15 @@ export class AuthGuard implements CanActivate {
   currentUser: ApplicationUser;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
-    this.currentUser = this.authenticationService.currentUserValue;
+    // this.currentUser = this.authenticationService.currentUserValue;
+    // console.log(this.currentUser + 'in guard constructor');
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
+    this.currentUser = this.authenticationService.currentUserValue;
+    console.log(this.currentUser + 'in guard in can activate');
     if (this.currentUser) {
       if (route.data.roles) {
         console.log(route.data.roles);
@@ -37,10 +40,11 @@ export class AuthGuard implements CanActivate {
       } else {
         return true;
       }
-      this.router.navigate(['/']);
+      console.log('can activate before /home');
+      this.router.navigate(['/home']);
       return false;
     }
-
+    console.log('can activate before /login');
     this.router.navigate(['/login']);
     return false;
   }

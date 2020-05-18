@@ -1,0 +1,92 @@
+<div class="container">
+  <form [formGroup]="organizationForm" (ngSubmit)="saveOrganization()" autocomplete="off">
+    <div class="form-group">
+      <label for="nameId">Numele organizatiei</label>
+      <input class="form-control"
+             id="nameId"
+             formControlName="name"
+             type="text"
+             placeholder="Introduceti va rugam numele organizatiei"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(organizationForm.get('name').touched || organizationForm.get('name').dirty) && !organizationForm.get('name').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="organizationForm.get('name').errors?.required">
+        Va rugam introduceti numele!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="contactPersonId">Numele persoanei de contact</label>
+      <input class="form-control"
+             id="contactPersonId"
+             formControlName="contactPerson"
+             type="text"
+             placeholder="Introduceti va rugam numele persoanei de contact"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(organizationForm.get('contactPerson').touched || organizationForm.get('contactPerson').dirty) && !organizationForm.get('contactPerson').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="organizationForm.get('contactPerson').errors?.required">
+        Va rugam introduceti numele persoanei de contact!
+        </span>
+      </span>
+    </div>
+
+
+    <div class="form-group">
+      <label for="phoneNumberId">Numarul de telefon</label>
+      <input class="form-control" id="phoneNumberId"
+             formControlName="phoneNumber"
+             type="text"
+             placeholder="Numarul de telefon - se completeaza obligatoriu"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(organizationForm.get('phoneNumber').touched || organizationForm.get('phoneNumber').dirty) && !organizationForm.get('phoneNumber').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="organizationForm.get('phoneNumber').errors?.required">
+        Va rugam introduceti numarul de telefon!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="emailId">Email</label>
+      <input class="form-control"
+             id="emailId"
+             formControlName="email"
+             type="email"
+             placeholder="Introduceti va rugam adresa de email a organizatiei"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(organizationForm.get('email').touched || organizationForm.get('email').dirty) && !organizationForm.get('email').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="organizationForm.get('email').errors?.required">
+        Va rugam introduceti adresa de mail!
+        </span>
+      </span>
+
+    </div>
+    <div class="form-group">
+      <label for="detailsId">Detalii</label>
+      <input class="form-control"
+             id="detailsId"
+             formControlName="details"
+             type="text"
+             placeholder="Introduceti va rugam detalii"
+             onfocus="placeholder = ''"
+      />
+
+    </div>
+    <button type="submit"
+            class="btn btn-primary"
+            [title]="organizationForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+            [disabled]="!organizationForm.valid"
+    >Salveaza
+    </button>
+  </form>
+</div>
+<br> Dirty: {{organizationForm.dirty}}
+<br> Touched: {{organizationForm.touched}}
+<br> Valid: {{organizationForm.valid}}
+<br> Value: {{organizationForm.value | json}}
+

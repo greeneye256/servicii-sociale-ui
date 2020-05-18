@@ -1,13 +1,49 @@
-<div style="font-size: 15pt; text-align: center">
-  <img src="/../assets/img/maltez.png">
-  <h1 style="margin-top: 10px" >APLICATIE BENEFICIARI</h1>
-  <p style="margin-right: 20px">{{name}}<a style="margin-left: 20px; margin-right: 20px" *ngIf="isAuthenticated" (click)="logout()">Logout</a></p>
-</div>
-<nav *ngIf="isAuthenticated" style="text-align: center">
-  <a class="nav-item nav-link" routerLink="/home">Acasa</a>
-  <a class="nav-item nav-link" routerLink="/users" *ngIf="isAdmin">Lista useri</a>
-  <a class="nav-item nav-link" routerLink="/sign-up" *ngIf="isAdmin">Sign-up user</a>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Aplicatie beneficiari</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button *ngIf="isAdmin" routerLink="/sign-up"> Adauga utilizator </a>
+      <a mat-button *ngIf="isAdmin" routerLink="/users"> Lista utilizatori </a>
+      <a mat-button *ngIf="isAuthenticated"> Utilizator logat: {{name}} </a>
+      <a mat-button *ngIf="isAuthenticated" (click)="logout()"> Deconectare </a>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button routerLink="/organization-create"> Adauga organizatie </a>
+      <a mat-button routerLink="/organization-list"> Lista organizatii </a>
+      <a mat-button routerLink="/volunteer-create"> Adauga voluntar </a>
+      <a mat-button routerLink="/volunteer-list"> Lista voluntari </a>
+      <a mat-button routerLink="/employee-list"> Lista angajati </a>
+      <a mat-button routerLink="/employee-create"> Adauga angajat </a>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button routerLink="/social-case-create"> Adauga caz social </a>
+      <a mat-button routerLink="/social-case-list"> Lista cazuri sociale </a>
+    </div>
+  </mat-toolbar-row>
 
-</nav>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened="true" *ngIf="isAuthenticated">
+    <h1 style="margin-top: 15px">Meniul principal</h1>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/accounts'"> {{personsForThisDay}} persoane pentru ziua in curs </a>
+      <a mat-list-item [routerLink]="'/accounts'"> {{personsInCare}} persoane in grija </a>
+      <a mat-list-item [routerLink]="'/accounts'"> {{personsToBeHandled}} persoane nealocate </a>
+<!--      <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>-->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
 
-<router-outlet></router-outlet>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

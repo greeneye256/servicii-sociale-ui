@@ -1,0 +1,22 @@
+<div class="container">
+  <form [formGroup]="employeeForm" (ngSubmit)="updateEmployee()">
+    <div class="form-group">
+      <label for="lastName">Nume</label>
+      <input id="lastName" type="text" class="form-control" formControlName="lastName" required autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Prenume</label>
+      <input type="text" class="form-control" formControlName="firstName" required autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Numar de telefon</label>
+      <input type="text" class="form-control" formControlName="phoneNumber" required autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email" required autofocus/>
+    </div>
+    <button type="submit" class="btn btn-primary">Modifica datele angajatului</button>
+  </form>
+</div>
+

@@ -1,0 +1,81 @@
+<div class="container">
+  <form [formGroup]="volunteerForm" (ngSubmit)="saveVolunteer()" autocomplete="off">
+    <div class="form-group">
+      <label for="lastNameId">Numele</label>
+      <input class="form-control"
+             id="lastNameId"
+             formControlName="lastName"
+             type="text"
+             placeholder="Introduceti va rugam numele voluntarului"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(volunteerForm.get('lastName').touched || volunteerForm.get('lastName').dirty) && !volunteerForm.get('lastName').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="volunteerForm.get('lastName').errors?.required">
+        Va rugam introduceti numele!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="firstNameId">Prenumele</label>
+      <input class="form-control"
+             id="firstNameId"
+             formControlName="firstName"
+             type="text"
+             placeholder="Introduceti va rugam prenumele voluntarului"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(volunteerForm.get('firstName').touched || volunteerForm.get('firstName').dirty) && !volunteerForm.get('firstName').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="volunteerForm.get('firstName').errors?.required">
+        Va rugam introduceti prenumele!
+        </span>
+      </span>
+
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumberId">Numarul de telefon</label>
+      <input class="form-control" id="phoneNumberId"
+             formControlName="phoneNumber"
+             type="text"
+             placeholder="Numarul de telefon - se completeaza obligatoriu"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(volunteerForm.get('phoneNumber').touched || volunteerForm.get('phoneNumber').dirty) && !volunteerForm.get('phoneNumber').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="volunteerForm.get('phoneNumber').errors?.required">
+        Va rugam introduceti numarul de telefon!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="emailId">Email</label>
+      <input class="form-control"
+             id="emailId"
+             formControlName="email"
+             type="email"
+             placeholder="Introduceti va rugam adresa de email a voluntarului"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(volunteerForm.get('email').touched || volunteerForm.get('email').dirty) && !volunteerForm.get('email').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="volunteerForm.get('email').errors?.required">
+        Va rugam introduceti adresa de mail!
+        </span>
+      </span>
+
+    </div>
+    <button type="submit"
+            class="btn btn-primary"
+            [title]="volunteerForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+            [disabled]="!volunteerForm.valid"
+    >Adauga voluntar
+    </button>
+  </form>
+</div>
+<br> Dirty: {{volunteerForm.dirty}}
+<br> Touched: {{volunteerForm.touched}}
+<br> Valid: {{volunteerForm.valid}}
+<br> Value: {{volunteerForm.value | json}}
+

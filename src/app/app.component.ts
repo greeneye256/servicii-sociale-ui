@@ -14,6 +14,9 @@ export class AppComponent {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
+    this.personsForThisDay = 10;
+    this.personsInCare = 4;
+    this.personsToBeHandled = 6;
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
       if (this.currentUser) {
@@ -43,6 +46,9 @@ export class AppComponent {
   title = 'volunteers-ui';
   currentUser: ApplicationUser;
   name: string;
+  personsForThisDay: number;
+  personsInCare: number;
+  personsToBeHandled: number;
 
   getRole(role: string) {
     if (!this.currentUser) {

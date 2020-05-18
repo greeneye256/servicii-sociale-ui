@@ -1,0 +1,81 @@
+<div class="container">
+  <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()" autocomplete="off">
+    <div class="form-group">
+      <label for="lastNameId">Numele</label>
+      <input class="form-control"
+             id="lastNameId"
+             formControlName="lastName"
+             type="text"
+             placeholder="Introduceti va rugam numele angajatului"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(employeeForm.get('lastName').touched || employeeForm.get('lastName').dirty) && !employeeForm.get('lastName').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="employeeForm.get('lastName').errors?.required">
+        Va rugam introduceti numele angajatului!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="firstNameId">Prenumele</label>
+      <input class="form-control"
+             id="firstNameId"
+             formControlName="firstName"
+             type="text"
+             placeholder="Introduceti va rugam prenumele angajatului"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(employeeForm.get('firstName').touched || employeeForm.get('firstName').dirty) && !employeeForm.get('firstName').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="employeeForm.get('firstName').errors?.required">
+        Va rugam introduceti prenumele angajatului!
+        </span>
+      </span>
+
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumberId">Numarul de telefon</label>
+      <input class="form-control" id="phoneNumberId"
+             formControlName="phoneNumber"
+             type="text"
+             placeholder="Numarul de telefon - se completeaza obligatoriu"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(employeeForm.get('phoneNumber').touched || employeeForm.get('phoneNumber').dirty) && !employeeForm.get('phoneNumber').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="employeeForm.get('phoneNumber').errors?.required">
+        Va rugam introduceti numarul de telefon al angajatului!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="emailId">Email</label>
+      <input class="form-control"
+             id="emailId"
+             formControlName="email"
+             type="email"
+             placeholder="Introduceti va rugam adresa de email a angajatului"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(employeeForm.get('email').touched || employeeForm.get('email').dirty) && !employeeForm.get('email').valid}"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="employeeForm.get('email').errors?.required">
+        Va rugam introduceti adresa de mail a angajatului!
+        </span>
+      </span>
+
+    </div>
+    <button type="submit"
+            class="btn btn-primary"
+            [title]="employeeForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+            [disabled]="!employeeForm.valid"
+    >Adauga angajat
+    </button>
+  </form>
+</div>
+<br> Dirty: {{employeeForm.dirty}}
+<br> Touched: {{employeeForm.touched}}
+<br> Valid: {{employeeForm.valid}}
+<br> Value: {{employeeForm.value | json}}
+

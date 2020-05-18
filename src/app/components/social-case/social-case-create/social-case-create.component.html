@@ -1,0 +1,167 @@
+<div class="container">
+  <form [formGroup]="socialCaseForm" (ngSubmit)="saveSocialCase()" autocomplete="off">
+    <div class="form-group">
+      <label for="dateOfTakingOverCase">Data sesizarii cazului</label>
+      <input id="dateOfTakingOverCase"
+             type="date"
+             class="form-control"
+             formControlName="dateOfTakingOverCase"
+             onfocus="placeholder = ''"
+             autofocus/>
+    </div>
+    <div class="form-group">
+      <label for="notifyingPerson">Numele persoanei care a sesizat cazul</label>
+      <input id="notifyingPerson"
+             type="text"
+             class="form-control"
+             formControlName="notifyingPerson"
+             placeholder="se completeaza obligatoriu"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(socialCaseForm.get('notifyingPerson').touched || socialCaseForm.get('notifyingPerson').dirty) && !socialCaseForm.get('notifyingPerson').valid}"
+             autofocus/>
+      <span class="invalid-feedback">
+        <span *ngIf="socialCaseForm.get('notifyingPerson').errors?.required">
+        Va rugam introduceti numele persoanei care a sesizat cazul!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="notifyingPersonPhoneNumber">Numarul de telefon al persoanei care a sesizat cazul</label>
+      <input id="notifyingPersonPhoneNumber"
+             type="text"
+             class="form-control"
+             formControlName="notifyingPersonPhoneNumber"
+             placeholder="se completeaza obligatoriu"
+             onfocus="placeholder = ''"
+             [ngClass]="{'is-invalid':(socialCaseForm.get('notifyingPersonPhoneNumber').touched || socialCaseForm.get('notifyingPersonPhoneNumber').dirty) && !socialCaseForm.get('notifyingPersonPhoneNumber').valid}"
+             autofocus/>
+      <span class="invalid-feedback">
+        <span *ngIf="socialCaseForm.get('notifyingPersonPhoneNumber').errors?.required">
+        Va rugam introduceti numarul de telefon al persoanei care a sesizat cazul!
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="employee">Angajatul responsabil de caz</label>
+      <select id="employee" class="form-control" formControlName="employee" required
+              [ngClass]="{'is-invalid':(socialCaseForm.get('employee').touched || socialCaseForm.get('employee').dirty) && !socialCaseForm.get('employee').valid}">
+        <option value="" disabled>Selectati angajatul</option>
+        <option *ngFor="let employee of employees"
+                [ngValue]="employee">{{employee.firstName}} {{employee.lastName}}</option>
+      </select>
+      <span class="invalid-feedback">
+        <span *ngIf="socialCaseForm.get('employee').errors?.required">
+        Va rugam selectati angajatul!
+        </span>
+      </span>
+    </div>
+    <div formGroupName="beneficiary">
+      <div class="form-group">
+        <label for="firstName">Nume beneficiar</label>
+        <input class="form-control" id="firstName"
+               formControlName="firstName"
+               type="text"
+               placeholder="se completeaza obligatoriu"
+               onfocus="placeholder = ''"
+               [ngClass]="{'is-invalid':(socialCaseForm.get('beneficiary').get('firstName').touched || socialCaseForm.get('beneficiary').get('firstName').dirty) && !socialCaseForm.get('beneficiary').get('firstName').valid}"
+        />
+        <span class="invalid-feedback">
+        <span *ngIf="socialCaseForm.get('beneficiary').get('firstName').errors?.required">
+        Va rugam introduceti numele!
+        </span>
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Prenume beneficiar</label>
+        <input class="form-control" id="lastName"
+               formControlName="lastName"
+               type="text"
+               placeholder="se completeaza obligatoriu"
+               onfocus="placeholder = ''"
+               [ngClass]="{'is-invalid':(socialCaseForm.get('beneficiary').get('lastName').touched || socialCaseForm.get('beneficiary').get('lastName').dirty) && !socialCaseForm.get('beneficiary').get('lastName').valid}"
+        />
+        <span class="invalid-feedback">
+        <span *ngIf="socialCaseForm.get('beneficiary').get('lastName').errors?.required">
+        Va rugam introduceti numele!
+        </span>
+        </span>
+      </div>
+
+      <div formArrayName="relatives">
+        <button type="button" (click)="addRelative()">Adauga membru de familie</button>
+        <div *ngFor="let relative of relatives.controls; let i=index">
+          <div [formGroup]="relative">
+            <label for="relFirstName">Nume</label>
+            <input id="relFirstName"
+                   class="form-control"
+                   formControlName="firstName"
+                   type="text"/>
+            <label for="relLastName">Prenume</label>
+            <input id="relLastName"
+                   class="form-control"
+                   formControlName="lastName"
+                   type="text"/>
+            <label for="relAge">Varsta</label>
+            <input id="relAge"
+                   class="form-control"
+                   formControlName="age"
+                   type="text"/>
+            <label for="familyBonding">Tip de ruda</label>
+            <input id="familyBonding" class="form-control"
+                   formControlName="familyBonding"
+                   type="text"/>
+            <button type="button" (click)="deleteRelative(i)">Sterge membrul de familie</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label for="age">Varsta</label>
+        <input class="form-control"
+               id="age"
+               formControlName="age"
+               type="text"/>
+        <!--               placeholder="se completeaza obligatoriu"-->
+        <!--               onfocus="placeholder = ''"-->
+        <!--               [ngClass]="{'is-invalid':(socialCaseForm.get('beneficiary').get('cnp').touched || socialCaseForm.get('beneficiary').get('cnp').dirty) && !socialCaseForm.get('beneficiary').get('cnp').valid}"-->
+        <!--        />-->
+        <!--        <span class="invalid-feedback">-->
+        <!--        <span *ngIf="socialCaseForm.get('beneficiary').get('cnp').errors?.required">-->
+        <!--        Va rugam introduceti varsta!-->
+        <!--        </span>-->
+        <!--      </span>-->
+      </div>
+      <div class="form-group">
+        <label for="personalNumericCode">CNP</label>
+        <input class="form-control"
+               id="personalNumericCode"
+               formControlName="cnp"
+               type="text"
+               placeholder="se completeaza obligatoriu"
+               onfocus="placeholder = ''"
+               [ngClass]="{'is-invalid':(socialCaseForm.get('beneficiary').get('cnp').touched || socialCaseForm.get('beneficiary').get('cnp').dirty) && !socialCaseForm.get('beneficiary').get('cnp').valid}"
+        />
+        <span class="invalid-feedback">
+        <span *ngIf="socialCaseForm.get('beneficiary').get('cnp').errors?.required">
+        Va rugam introduceti CNP!
+        </span>
+      </span>
+      </div>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary"
+            [title]="socialCaseForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+            [disabled]="!socialCaseForm.valid"
+    >Adauga
+    </button>
+  </form>
+</div>
+<br> Dirty: {{socialCaseForm.dirty}}
+<br> Touched: {{socialCaseForm.touched}}
+<br> Valid: {{socialCaseForm.valid}}
+<br> Value: {{socialCaseForm.value | json}}
+

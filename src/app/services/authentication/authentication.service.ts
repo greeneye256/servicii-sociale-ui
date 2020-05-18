@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {first, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {ApplicationUser} from '../../model/applicationUser';
 import {UserRole} from '../../model/userRole';
 
@@ -23,8 +23,6 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    // tslint:disable-next-line:prefer-const
-    console.log('you are in login');
     const rolesToAssign = [];
     return this.http.post<any>(`server/login`, {username, password})
       .pipe(map(user => {
@@ -32,6 +30,7 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
+          // tslint:disable-next-line:prefer-for-of
           for (let i = 0; i < userRoles.length; i++) {
             const role = userRoles[i];
             switch (role) {
@@ -52,7 +51,6 @@ export class AuthenticationService {
           user.roles = rolesToAssign;
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-
         }
         return user;
       }));

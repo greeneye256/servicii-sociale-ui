@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
     if (this.authenticationService.currentUserValue) {
+      console.log('login constructor before /home');
       this.router.navigate(['/home']);
     }
   }
@@ -46,7 +47,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(data => {
-        this.router.navigate(['/']);
+        console.log('on submit before /home');
+        this.router.navigate(['/home']);
       }, error => {
         this.error = error;
       });

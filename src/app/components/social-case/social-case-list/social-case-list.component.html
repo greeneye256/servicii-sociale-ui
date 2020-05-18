@@ -1,0 +1,33 @@
+<div class='card' style="width: 70%; margin: auto">
+  <div class="card-header">
+    Lista cazuri
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <th>Numar de caz</th>
+      <th>Data inregistrarii cazului</th>
+      <th>Persoana care a sesizat cazul</th>
+      <th>Numarul de telefon al persoanei care a sesizat cazul</th>
+      <th>Nume beneficiar</th>
+      <th>Nume angajat responsabil</th>
+      <th>Nume voluntar responsabil</th>
+      <th>Nume organizatie responsabila</th>
+      <th></th>
+      </thead>
+      <tr *ngFor="let socialCase of socialCases">
+        <td>{{socialCase.id}}</td>
+        <td>{{socialCase.dateOfTakingOverCase}}</td>
+        <td>{{socialCase.notifyingPerson}}</td>
+        <td>{{socialCase.notifyingPersonPhoneNumber}}</td>
+        <td>{{socialCase.beneficiary.firstName}}</td>
+        <td>{{socialCase.employee.firstName}}</td>
+        <td>{{socialCase.volunteer?.firstName || 'none'}}</td>
+        <td>{{socialCase.organization?.name || 'none'}}</td>
+        <td><a type="button" routerLink="/organization-edit/{{socialCase.id}}">Edit</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
